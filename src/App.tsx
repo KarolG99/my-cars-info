@@ -1,24 +1,18 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { StyledMain, Wrapper } from "./App.styles";
+import { ThemeProvider } from "styled-components";
+import { StyledMain } from "./App.styles";
 import { GlobalStyle } from "./assets/styles/GlobalStyles";
-import AddCar from "./components/AddCar/AddCar";
-import AllCars from "./components/AllCars/AllCars";
-import Navigation from "./components/Navigation/Navigation";
+import { theme } from "./assets/styles/theme";
+import MainPage from "./components/organisms/MainPage/MainPage";
 
 function App() {
   return (
-    <Wrapper>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <StyledMain>
-        <Routes>
-          <Route path="/" element={<AllCars />} />
-          <Route path="/add-car" element={<AddCar />} />
-        </Routes>
+        <MainPage />
       </StyledMain>
-
-      <Navigation />
-    </Wrapper>
+    </ThemeProvider>
   );
 }
 
