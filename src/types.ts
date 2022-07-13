@@ -6,8 +6,8 @@ export type IFormField = {
   id: string;
   name: string;
   label: string;
-  placeholder: string;
-  value: string;
+  placeholder?: string;
+  value: any;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -16,10 +16,17 @@ export type InitialFormValuesProps = {
   brand: string;
   model: string;
   year: string;
+  oilDate?: string;
+  oilKm?: string;
+  inspection?: string;
 };
 
 export type CarsProps = {
   brand: string;
   model: string;
   year: string;
+  oilDate?: string;
+  oilKm?: string;
+  inspection?: string;
 };
+

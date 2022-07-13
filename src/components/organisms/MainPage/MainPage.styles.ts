@@ -15,6 +15,7 @@ export const ButtonsWrapper = styled.div`
   max-width: 300px;
   display: flex;
   justify-content: space-around;
+  margin-top: 20px;
 `;
 
 export const CarIcon = styled(Car)``;
