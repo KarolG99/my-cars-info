@@ -56,7 +56,7 @@ const MainPage = () => {
 
   return (
     <Wrapper>
-      <StyledH1>Moje auta</StyledH1>
+      <StyledH1>Moje pojazdy</StyledH1>
 
       {!isFormOpen ? (
         <StyledButton onClick={() => setIsFormOpen((prev) => !prev)}>
