@@ -10,4 +10,11 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
 `;
 
+export const ButtonsWrapper = styled.div`
+  width: 80%;
+  max-width: 300px;
+  display: flex;
+  justify-content: space-around;
+`;
+
 export const CarIcon = styled(Car)``;

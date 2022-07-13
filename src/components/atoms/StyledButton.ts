@@ -13,6 +13,7 @@ export const StyledButton = styled.button`
   font-weight: 600;
   border: none;
   cursor: pointer;
+
   svg {
     margin-left: 8px;
     fill: ${({ theme }) => theme.colors.blue};
@@ -20,5 +21,19 @@ export const StyledButton = styled.button`
 
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.blue};
+  }
+
+  &.cancel {
+    color: ${({ theme }) => theme.colors.red};
+    background-color: ${({ theme }) => theme.colors.lightRed};
+
+    span {
+      transform: rotate(45deg);
+      margin-left: 3px;
+    }
+
+    &:hover {
+      border: 1px solid ${({ theme }) => theme.colors.red};
+    }
   }
 `;
