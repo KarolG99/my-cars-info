@@ -13,20 +13,25 @@ export type IFormField = {
 
 // MainPage
 export type InitialFormValuesProps = {
+  id: string;
   brand: string;
   model: string;
   year: string;
   oilDate?: string;
   oilKm?: string;
   inspection?: string;
+  insuranceEnd?: string;
+  handleDeleteCar?: () => void;
 };
 
 export type CarsProps = {
+  id: string;
   brand: string;
   model: string;
   year: string;
   oilDate?: string;
   oilKm?: string;
   inspection?: string;
+  insuranceEnd?: string;
+  handleDeleteCar?: () => void;
 };
-

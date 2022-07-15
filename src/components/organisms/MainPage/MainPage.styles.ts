@@ -16,6 +16,10 @@ export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+
+  &.modal {
+    margin: 0;
+  }
 `;
 
 export const CarIcon = styled(Car)``;

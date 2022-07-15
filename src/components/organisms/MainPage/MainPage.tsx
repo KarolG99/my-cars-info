@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { CarsProps, InitialFormValuesProps } from "../../../types";
-import { StyledButton } from "../../atoms/StyledButton";
-import { StyledH1 } from "../../atoms/StyledH1";
+import { v4 as uuid } from "uuid";
+
 import FormField from "../../molecules/FormField/FormField";
 import NoCarInfo from "../../molecules/NoCarInfo/NoCarInfo";
 import SingleCar from "../../molecules/SingleCar/SingleCar";
+import { StyledButton } from "../../atoms/StyledButton";
+import { StyledH1 } from "../../atoms/StyledH1";
+import { CarsProps, InitialFormValuesProps } from "../../../types";
 import { ButtonsWrapper, CarIcon, Wrapper } from "./MainPage.styles";
 
 const initialFormValues: InitialFormValuesProps = {
+  id: "",
   brand: "",
   model: "",
   year: "",
   oilDate: "",
   oilKm: "",
   inspection: "",
+  insuranceEnd: "",
 };
 
 const MainPage = () => {
@@ -36,12 +40,14 @@ const MainPage = () => {
 
   const handleSubmitForm = () => {
     const newCar = {
+      id: uuid(),
       brand: formValues.brand,
       model: formValues.model,
       year: formValues.year,
       oilDate: formValues.oilDate,
       oilKm: formValues.oilKm,
       inspection: formValues.inspection,
+      insuranceEnd: formValues.insuranceEnd,
     };
     setCars([...cars, newCar]);
     handleCancelForm();
@@ -52,6 +58,14 @@ const MainPage = () => {
         newCar,
       ])
     );
+  };
+
+  const handleDeleteCar = (id: string) => {
+    const currentCars = storedCars.filter(
+      (car: { id: string }) => car.id !== id
+    );
+    localStorage.setItem("cars", JSON.stringify([...currentCars]));
+    setCars(currentCars);
   };
 
   return (
@@ -112,6 +126,14 @@ const MainPage = () => {
             value={formValues.inspection}
             onChange={handleInputChange}
           />
+          <FormField
+            type="date"
+            id="insuranceEnd"
+            name="insuranceEnd"
+            label="Data wygaśnięcia ubezpieczenia"
+            value={formValues.insuranceEnd}
+            onChange={handleInputChange}
+          />
 
           <ButtonsWrapper>
             <StyledButton className="cancel" onClick={handleCancelForm}>
@@ -127,6 +149,7 @@ const MainPage = () => {
       ) : (
         storedCars.map((car: CarsProps, index: number) => (
           <SingleCar
+            id={car.id}
             key={index}
             brand={car.brand}
             model={car.model}
@@ -134,6 +157,7 @@ const MainPage = () => {
             oilDate={car.oilDate}
             oilKm={car.oilKm}
             inspection={car.inspection}
+            handleDeleteCar={() => handleDeleteCar(car.id)}
           />
         ))
       )}
