@@ -25,6 +25,7 @@ const MainPage = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [cars, setCars] = useState<CarsProps[]>([]);
   const storedCars = JSON.parse(localStorage.getItem("cars") || "[]");
+  const [editedCarId, setEditedCarId] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
@@ -39,6 +40,12 @@ const MainPage = () => {
   };
 
   const handleSubmitForm = () => {
+    if (editedCarId) {
+      const currentCars = storedCars.filter(
+        (car: { id: string }) => car.id !== editedCarId
+      );
+      localStorage.setItem("cars", JSON.stringify([...currentCars]));
+    }
     const newCar = {
       id: uuid(),
       brand: formValues.brand,
@@ -66,6 +73,21 @@ const MainPage = () => {
     );
     localStorage.setItem("cars", JSON.stringify([...currentCars]));
     setCars(currentCars);
+  };
+
+  const handleEditCar = (id: string) => {
+    const currentCar = storedCars.filter(
+      (car: { id: string }) => car.id === id
+    );
+    setIsFormOpen(true);
+    formValues.brand = currentCar[0].brand;
+    formValues.model = currentCar[0].model;
+    formValues.year = currentCar[0].year;
+    formValues.oilDate = currentCar[0].oilDate;
+    formValues.oilKm = currentCar[0].oilKm;
+    formValues.inspection = currentCar[0].inspection;
+    formValues.insuranceEnd = currentCar[0].insuranceEnd;
+    setEditedCarId(id);
   };
 
   return (
@@ -157,7 +179,9 @@ const MainPage = () => {
             oilDate={car.oilDate}
             oilKm={car.oilKm}
             inspection={car.inspection}
+            insuranceEnd={car.insuranceEnd}
             handleDeleteCar={() => handleDeleteCar(car.id)}
+            handleEditCar={() => handleEditCar(car.id)}
           />
         ))
       )}

@@ -22,6 +22,7 @@ export type InitialFormValuesProps = {
   inspection?: string;
   insuranceEnd?: string;
   handleDeleteCar?: () => void;
+  handleEditCar?: () => void;
 };
 
 export type CarsProps = {
@@ -34,4 +35,5 @@ export type CarsProps = {
   inspection?: string;
   insuranceEnd?: string;
   handleDeleteCar?: () => void;
+  handleEditCar?: () => void;
 };

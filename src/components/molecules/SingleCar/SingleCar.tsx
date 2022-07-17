@@ -19,7 +19,9 @@ const SingleCar = ({
   oilDate,
   oilKm,
   inspection,
+  insuranceEnd,
   handleDeleteCar,
+  handleEditCar,
 }: CarsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,7 +54,7 @@ const SingleCar = ({
           <DeleteIcon />
         </StyledDeleteEdit>
 
-        <StyledDeleteEdit className="edit">
+        <StyledDeleteEdit className="edit" onClick={handleEditCar}>
           <EditIcon />
         </StyledDeleteEdit>
 
@@ -87,6 +89,12 @@ const SingleCar = ({
             <br />
             <span> {inspection}</span>
           </p>
+        )}
+        {insuranceEnd && (
+          <>
+            <p>Data wygaśnięcia ubezpieczenia:</p>
+            <span>{insuranceEnd}</span>
+          </>
         )}
       </StyledSingleCar>
     </>
