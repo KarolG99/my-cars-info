@@ -8,6 +8,7 @@ import { StyledButton } from "../../atoms/StyledButton";
 import { StyledH1 } from "../../atoms/StyledH1";
 import { CarsProps, InitialFormValuesProps } from "../../../types";
 import { ButtonsWrapper, CarIcon, Wrapper } from "./MainPage.styles";
+import { StyledErrorMessage } from "../../atoms/ErrorMessage.styles";
 
 const initialFormValues: InitialFormValuesProps = {
   id: "",
@@ -26,6 +27,7 @@ const MainPage = () => {
   const [cars, setCars] = useState<CarsProps[]>([]);
   const storedCars = JSON.parse(localStorage.getItem("cars") || "[]");
   const [editedCarId, setEditedCarId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
@@ -37,34 +39,47 @@ const MainPage = () => {
   const handleCancelForm = () => {
     setIsFormOpen(false);
     setFormValues(initialFormValues);
+    setErrorMessage("");
   };
 
   const handleSubmitForm = () => {
-    if (editedCarId) {
-      const currentCars = storedCars.filter(
-        (car: { id: string }) => car.id !== editedCarId
+    if (
+      formValues.brand.length > 1 &&
+      formValues.model.length > 1 &&
+      formValues.year.length > 3
+    ) {
+      if (editedCarId) {
+        const currentCars = storedCars.filter(
+          (car: { id: string }) => car.id !== editedCarId
+        );
+        localStorage.setItem("cars", JSON.stringify([...currentCars]));
+      }
+      const newCar = {
+        id: uuid(),
+        brand: formValues.brand,
+        model: formValues.model,
+        year: formValues.year,
+        oilDate: formValues.oilDate,
+        oilKm: formValues.oilKm,
+        inspection: formValues.inspection,
+        insuranceEnd: formValues.insuranceEnd,
+      };
+      setCars([...cars, newCar]);
+      handleCancelForm();
+      localStorage.setItem(
+        "cars",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("cars") || "[]"),
+          newCar,
+        ])
       );
-      localStorage.setItem("cars", JSON.stringify([...currentCars]));
+    } else if (formValues.brand.length <= 1) {
+      setErrorMessage("Podaj markę samochodu");
+    } else if (formValues.model.length <= 1) {
+      setErrorMessage("Podaj model samochodu");
+    } else if (formValues.year.length <= 3) {
+      setErrorMessage("Podaj rok produkcji samochodu");
     }
-    const newCar = {
-      id: uuid(),
-      brand: formValues.brand,
-      model: formValues.model,
-      year: formValues.year,
-      oilDate: formValues.oilDate,
-      oilKm: formValues.oilKm,
-      inspection: formValues.inspection,
-      insuranceEnd: formValues.insuranceEnd,
-    };
-    setCars([...cars, newCar]);
-    handleCancelForm();
-    localStorage.setItem(
-      "cars",
-      JSON.stringify([
-        ...JSON.parse(localStorage.getItem("cars") || "[]"),
-        newCar,
-      ])
-    );
   };
 
   const handleDeleteCar = (id: string) => {
@@ -117,6 +132,7 @@ const MainPage = () => {
             onChange={handleInputChange}
           />
           <FormField
+            type="number"
             id="year"
             name="year"
             label="Rok produkcji"
@@ -133,6 +149,7 @@ const MainPage = () => {
             onChange={handleInputChange}
           />
           <FormField
+            type="number"
             id="oilKm"
             name="oilKm"
             label="Przejechanych km podczas ostatniej wymiany"
@@ -156,6 +173,10 @@ const MainPage = () => {
             value={formValues.insuranceEnd}
             onChange={handleInputChange}
           />
+
+          {errorMessage && (
+            <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
+          )}
 
           <ButtonsWrapper>
             <StyledButton className="cancel" onClick={handleCancelForm}>

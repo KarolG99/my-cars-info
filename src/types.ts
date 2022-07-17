@@ -37,3 +37,4 @@ export type CarsProps = {
   handleDeleteCar?: () => void;
   handleEditCar?: () => void;
 };
+

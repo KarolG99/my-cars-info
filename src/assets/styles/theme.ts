@@ -9,6 +9,7 @@ export const theme = {
     inputBg: "#f0f0f0",
     red: "#FF0000",
     lightRed: "rgba(255, 0, 0, 0.1)",
+    mediumRed: "rgba(255, 0, 0, 0.22)",
     orange: "#FFC355",
     lightOrange: "rgba(255, 195, 85, 0.23)",
   },
