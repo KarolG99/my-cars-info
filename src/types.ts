@@ -38,3 +38,8 @@ export type CarsProps = {
   handleEditCar?: () => void;
 };
 
+export type IErrorMessage = {
+  brand: string;
+  model: string;
+  year: string;
+};

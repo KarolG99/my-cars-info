@@ -45,7 +45,7 @@ const MainPage = () => {
   const handleSubmitForm = () => {
     if (
       formValues.brand.length > 1 &&
-      formValues.model.length > 1 &&
+      formValues.model.length >= 1 &&
       formValues.year.length > 3
     ) {
       if (editedCarId) {
@@ -75,7 +75,7 @@ const MainPage = () => {
       );
     } else if (formValues.brand.length <= 1) {
       setErrorMessage("Podaj markę samochodu");
-    } else if (formValues.model.length <= 1) {
+    } else if (formValues.model.length < 1) {
       setErrorMessage("Podaj model samochodu");
     } else if (formValues.year.length <= 3) {
       setErrorMessage("Podaj rok produkcji samochodu");
@@ -174,9 +174,7 @@ const MainPage = () => {
             onChange={handleInputChange}
           />
 
-          {errorMessage && (
-            <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-          )}
+          {errorMessage && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
 
           <ButtonsWrapper>
             <StyledButton className="cancel" onClick={handleCancelForm}>
