@@ -1,4 +1,4 @@
-# <h1 align="center"> Moje Pojazdy 👨‍💻 </h1>
+# <h1 align="center"> Moje Pojazdy 🚙 </h1>
 
 <p align="center"><a href="https://mojepojazdy.netlify.app/"> DEMO </a></p>
 
