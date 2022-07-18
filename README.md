@@ -1,3 +1,34 @@
+# <h1 align="center">Moje Pojazdy</h1>
+
+<p align="center"><a href="https://mojepojazdy.netlify.app/"> DEMO </a></p>
+
+<br>
+
+## Project Overview 👀
+<b>Moje pojazdy</b> is an application where you can add the most important information about your vehicles and they are stored in LocalStorage.
+
+## Project Objectives 🎯
+Storing the most important vehicle information in one place without having to search for vehicle documents.
+
+## Main Features 🚀
+<ul>
+  <li>adding vehicle information</li>
+  <li>storing information in LocalStorage</li>
+  <li>editing vehicle information</li>
+  <li>deleting vehicle information</li>
+</ul>
+
+## Main Technologies 🕹
+<ul>
+  <li>React</li>
+  <li>TypeScript</li>
+  <li>StyledComponents</li>
+  <li>LocalStorage</li>
+  <li>uuid</li>
+</ul>
+
+<br>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
