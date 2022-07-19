@@ -25,9 +25,9 @@ const MainPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [cars, setCars] = useState<CarsProps[]>([]);
-  const storedCars = JSON.parse(localStorage.getItem("cars") || "[]");
   const [editedCarId, setEditedCarId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const storedCars = JSON.parse(localStorage.getItem("cars") || "[]");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
@@ -152,8 +152,8 @@ const MainPage = () => {
             type="number"
             id="oilKm"
             name="oilKm"
-            label="Przejechanych km podczas ostatniej wymiany"
-            placeholder="90 000"
+            label="Przejechanych km podczas ostatniej wymiany oleju"
+            placeholder="10.000"
             value={formValues.oilKm}
             onChange={handleInputChange}
           />
